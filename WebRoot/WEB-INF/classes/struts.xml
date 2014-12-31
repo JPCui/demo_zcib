@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 用于改善web页面与Java类交互的远程服务器端Ajax开源框架 -->
+    <constant name="struts.action.excludePattern" value="/dwr/.*"></constant>
+
+	<!-- 开发模式下，打印出更详细错误信息 -->
+	<constant name="struts.devMode" value="true"></constant>
+	
+	<!-- 设置web应用的默认编码集为UTF-8,相当于调用HttpServletRequest的setCharacterEncoding -->
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+
+	<!-- 指定需要struts2处理的请求后缀，该属性默认是action，若有多个，用,隔开 -->
+	<constant name="struts.action.extension" value="act"/>
+
+	<!-- 设置浏览器是否缓存静态内容，默认为true（生产环境下使用），开发阶段最好关闭 -->
+	<constant name="struts.serve.static.browserCache" value="false"/>
+
+	<!-- 当struts配置修改后，系统是否自动重新加载该文件，默认false，开发阶段最好打开 -->
+	<constant name="struts.configuration.xml.reload" value="true"/>
+
+	<!-- 设置web应用的默认Locale为(zh_CN,zh_UTF_8,en_UTF_8,en_GB)，最好在struts.properties中配置 -->
+	<constant name="struts.locale" value="zh_UTF_8"></constant>
+	
+	<!-- 设置struts2应用的国际化资源文件，多个文件中间可用逗号分隔 -->
+	<constant name="struts.custom.i18n.resources" value="messageResource"/>
+    
+	<!-- 默认的视图主题 -->
+	<constant name="struts.ui.theme" value="simple"/>
+	
+	<!-- 文件存放的临时文件夹 -->
+	<constant name="struts.multipart.saveDir" value="/dist/temp"></constant>
+	
+	<!-- 指定下面的action由spring进行创建 -->
+	<constant name="struts.objectFactory" value="spring"/>
+	
+    <package name="base" extends="struts-default,json-default" namespace="/">
+    
+		<interceptors>
+			<!-- 配置自定义拦截器LogInterceptor -->
+			<interceptor-stack name="logException">
+				<interceptor-ref name="defaultStack"/>
+				<!-- 覆盖defultStack中的exception设置，启用它的日志功能 -->
+				<interceptor-ref name="exceptionLog">
+					<param name="logEnabled">true</param>
+					<param name="logLevel">info</param>
+				</interceptor-ref>
+			</interceptor-stack>
+			<interceptor name="exceptionLog" class="cn.zcib.action.intercepter.ExceptionLogInterceptor"/>
+			<!-- 配置自定义拦截器LoginedCheckInterceptor -->
+			<interceptor name="loginedCheck" class="cn.zcib.action.intercepter.LoginedCheckInterceptor"/>
+		</interceptors>
+		<!-- 修改默认的拦截器stack，原来是defaultStack -->
+		<default-interceptor-ref name="logException"></default-interceptor-ref>
+    
+		<!-- 定义全局result -->
+		<global-results>
+			<!-- 定义名为exception的全局result -->
+		    <result name="exception">/webCommon/exception/exception.jsp</result>
+		    <result name="tologin">/index.jsp</result>
+		    <result name="404">/webCommon/exception/404.jsp</result>
+		</global-results>
+
+		<!-- 定义全局异常映射 -->
+		<global-exception-mappings>
+			<!-- 捕捉到Exception异常(所有异常)时跳转到exception所命名的视图上 -->
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+		</global-exception-mappings>
+    </package>
+    
+    <include file="struts_webs_a.xml"/>
+    
+    <include file="struts_webs_s.xml"/>
+    
+    <include file="struts_utils.xml"/>
+    
+    <package name="webs_common" namespace="/common" extends="base">
+    	<action name="getAllDepartsJson" class="departAction" method="getAllDepartsJson">
+    		<result type="json">
+    			<param name="root">
+    				jsonMap
+    			</param>
+    		</result>
+    	</action>
+    	<!-- JC -->
+    	<action name="getJlsBySid" class="jcAction" method="getJlsBySid">
+    		<result name="list">/webs/s/jcgl/reward.jsp</result>
+    	</action>
+    	<action name="getCfsBySid" class="jcAction" method="getCfsBySid">
+    		<result name="list">/webs/s/jcgl/punish.jsp</result>
+    	</action>
+    	<!-- Config -->
+    	<action name="getAllConfigJson" class="configAction" method="getAllConfigJson">
+    		<result type="json">
+    			<param name="root">
+    				jsonMap
+    			</param>
+    		</result>
+    	</action>
+    </package>
+    
+</struts>
+
+

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 学生访问 -->
+	<package name="webs_s" namespace="/webs_s" extends="base">
+    	<action name="login" class="studentAction" method="login">
+    		<result type="redirect" name="success">/webCommon/index.jsp</result>
+    		<result name="fail">/index.jsp</result>
+    	</action>
+    	<action name="getStuFull" class="studentAction" method="getStuFull">
+    		<result name="bean">/webs/s/dagl/basicinfo.jsp</result>
+    	</action>
+	</package>
+</struts>
+
+

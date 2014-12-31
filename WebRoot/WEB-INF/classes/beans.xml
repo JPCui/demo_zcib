@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop
+						classpath:/org/springframework/aop/config/spring-aop-2.5.xsd
+						http://www.springframework.org/schema/beans
+						classpath:/org/springframework/beans/factory/xml/spring-beans-2.5.xsd
+						http://www.springframework.org/schema/context
+						classpath:/org/springframework/context/config/spring-context-2.5.xsd
+						http://www.springframework.org/schema/tx
+						classpath:/org/springframework/transaction/config/spring-tx-2.5.xsd
+						">
+	
+	<!-- DAO 层 -->
+	<bean id="baseDao" class="cn.zcib.dao.BaseDaoImpl" />
+	
+	<!-- SERVICE 层 -->
+	<bean id="classService" class="cn.zcib.service.impl.ClassServiceImpl" scope="prototype">
+		<property name="baseDao" ref="baseDao" />
+	</bean>
+	<bean id="departService" class="cn.zcib.service.impl.DepartServiceImpl" scope="prototype">
+		<property name="baseDao" ref="baseDao" />
+	</bean>
+	<bean id="majorService" class="cn.zcib.service.impl.MajorServiceImpl" scope="prototype">
+		<property name="baseDao" ref="baseDao" />
+	</bean>
+	<bean id="paymentService" class="cn.zcib.service.impl.PaymentServiceImpl" scope="prototype">
+		<property name="baseDao" ref="baseDao" />
+	</bean>
+	<bean id="rewardService" class="cn.zcib.service.impl.RewardServiceImpl" scope="prototype">
+		<property name="baseDao" ref="baseDao" />
+	</bean>
+	<bean id="roleService" class="cn.zcib.service.impl.RoleServiceImpl" scope="prototype">
+		<property name="baseDao" ref="baseDao" />
+	</bean>
+	<bean id="studentService" class="cn.zcib.service.impl.StudentServiceImpl" scope="prototype">
+		<property name="baseDao" ref="baseDao" />
+	</bean>
+	<bean id="userService" class="cn.zcib.service.impl.UserServiceImpl" scope="prototype">
+		<property name="baseDao" ref="baseDao" />
+	</bean>
+	<bean id="jcService" class="cn.zcib.service.impl.JCServiceImpl" scope="prototype">
+		<property name="baseDao" ref="baseDao" />
+	</bean>
+	<bean id="configService" class="cn.zcib.service.impl.ConfigServiceImpl" scope="prototype">
+		<property name="baseDao" ref="baseDao" />
+	</bean>
+	
+	<!-- ACTION 层 -->
+	 <bean id="pieChartAction" class="cn.zcib.action.PieChartAction" scope="prototype">
+	</bean>
+	 <bean id="studentAction" class="cn.zcib.action.StudentAction" scope="prototype">
+		<property name="studentService" ref="studentService"></property>
+	</bean>
+	 <bean id="userAction" class="cn.zcib.action.UserAction" scope="prototype">
+		<property name="studentService" ref="studentService"></property>
+		<property name="userService" ref="userService"></property>
+	</bean>
+	 <bean id="verifyCodeAction" class="cn.zcib.action.VerifyCodeAction" scope="prototype">
+	</bean>
+	 <bean id="departAction" class="cn.zcib.action.DepartAction" scope="prototype">
+	 	<property name="departService" ref="departService"></property>
+	</bean>
+	 <bean id="majorAction" class="cn.zcib.action.MajorAction" scope="prototype">
+	 	<property name="majorService" ref="majorService"></property>
+	</bean>
+	 <bean id="classAction" class="cn.zcib.action.ClassAction" scope="prototype">
+	 	<property name="classService" ref="classService"></property>
+	</bean>
+	 <bean id="jcAction" class="cn.zcib.action.JCAction" scope="prototype">
+	 	<property name="jcService" ref="jcService"></property>
+	</bean>
+	 <bean id="paymentAction" class="cn.zcib.action.PaymentAction" scope="prototype">
+	 	<property name="paymentService" ref="paymentService"></property>
+	</bean>
+	 <bean id="configAction" class="cn.zcib.action.ConfigAction" scope="prototype">
+	 	<property name="configService" ref="configService"></property>
+	</bean>
+</beans>

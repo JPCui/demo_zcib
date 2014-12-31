@@ -1,0 +1,61 @@
+#hide{
+	position: fixed;
+	left: 20%;
+	top: 70px;
+	margin:0px auto;
+	padding: 3px auto;
+	width:60%;
+	height:250px;
+	text-align: center;
+	overflow: hidden;
+	display: none;
+	z-index: 999;
+}
+#hide_t{
+	margin:0 auto;
+	background-color: #F2F2F2;
+	width:500px;
+	height: 30px;
+	line-height: 25px;
+	font-size: 20px;
+	font-family: "MicroSoft YaHei","SimHei";
+	font-weight: normal;
+}
+#hide_c{
+	margin:0 auto;
+	width:500px;
+	height: 200px;
+	background:white;
+}
+#hide_c table{
+	margin:0px auto;
+	width:100%;
+	line-height:100%;
+	text-align: center;
+}
+#hide_c table tr{
+	height: 30px;
+}
+#hide_c table input{
+	text-decoration: none;
+	width: 100%;
+	line-height:100%;
+	font-size: 20px;
+	text-align: center;
+}
+#hide_c table select{
+	text-decoration: none;
+	width: 100%;
+	line-height:100%;
+	height:100%;
+	font-size: 20px;
+	text-align: center;
+}
+#hide_c table option{
+	text-decoration: none;
+	width: 100%;
+	height: 100%;
+	line-height:100%;
+	font-size: 20px;
+	text-align: center;
+}

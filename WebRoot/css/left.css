@@ -1,0 +1,42 @@
+*{
+padding: 0px;
+margin: 0px;
+font-size: 12px;
+text-align: center;
+background-color: rgb(191, 229, 213);
+}
+body{
+width: 100%;
+}
+#left{
+width: 99%;
+height: 100%;
+bottom: 0px;
+background-color: rgb(191, 229, 213);
+}
+.submenu{
+width: 100%;
+line-height: 22px;
+cursor: pointer;
+color: rgb(1, 84, 54);
+border: 1px solid rgb(244, 255, 251);
+background-color: rgb(137, 191, 167);
+text-align: left;
+}
+.submenu b{
+margin-left: 20px;
+background-color: rgb(137, 191, 167);
+}
+.submenu ul{
+background-color: rgb(191, 229, 213);
+border: 1px solid rgb(244, 255, 251);
+text-align: center;
+width: 100%;
+}
+.submenu ul li{
+width: 100%;
+}
+ul{
+border: 0px;
+margin:0px;
+}

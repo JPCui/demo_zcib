@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- 管理员/老师访问 -->
+	<package name="webs_a" namespace="/webs_a" extends="base">
+    	<action name="login" class="userAction" method="login">
+    		<result type="redirect" name="success">/webCommon/index.jsp</result>
+    		<result name="fail">/index.jsp</result>
+    	</action>
+    	<!-- Student -->
+    	<action name="getStusByClass" class="studentAction" method="getStusByClass">
+    		<result name="list">/webs/a/dagl/stus.jsp</result>
+    	</action>
+    	<action name="oper_stu_*" class="studentAction" method="{1}">
+    		<result type="stream" name="none">
+				<param name="contentType">text/html</param>
+				<param name="inputName">status</param>
+			</result>
+    		<result type="json" name="yes">
+				<param name="contentType">text/html</param>
+			</result>
+    		<result type="json" name="no">
+				<param name="contentType">text/html</param>
+			</result>
+    	</action>
+    	<action name="getStuFull" class="studentAction" method="getStuFull">
+    		<result name="bean">/webs/a/dagl/stu.jsp</result>
+    	</action>
+    	
+    	<!-- Department -->
+    	<action name="getAllDepartsJson" class="departAction" method="getAllDepartsJson">
+    		<result type="json">
+    			<param name="root">
+    				jsonMap
+    			</param>
+    		</result>
+    	</action>
+    	<action name="getAllDeparts" class="departAction" method="getAllDeparts">
+    		<result name="list">/webs/a/xbgl/departs.jsp</result>
+    	</action>
+    	<action name="oper_depart_*" class="departAction" method="{1}">
+    		<result type="redirectAction" name="list">
+	    		<param name="actionName">getAllDeparts</param>
+	    		<param name="Msg">${Msg}</param>
+	    		<param name="encode">true</param>
+    		</result>
+    	</action>
+    	
+    	<!-- Major -->
+    	<action name="getMajorJsonByDept" class="majorAction" method="getMajorJsonByDept">
+    		<result type="json">
+    			<param name="root">
+    				jsonMap
+    			</param>
+    		</result>
+    	</action>
+    	<action name="getMajorByDept" class="majorAction" method="getMajorByDept">
+    		<result name="list">/webs/a/zygl/majors.jsp</result>
+    	</action>
+    	<action name="getMajorByCampus" class="majorAction" method="getMajorByCampus">
+    		<result name="list">/webs/a/zygl/majors.jsp</result>
+    	</action>
+    	<action name="oper_major_*" class="majorAction" method="{1}">
+    		<result type="redirectAction" name="list">
+	    		<param name="actionName">getMajorByDept</param>
+	    		<param name="Msg">${Msg}</param>
+	    		<param name="DepID">${DepID}</param>
+	    		<param name="encode">true</param>
+    		</result>
+    	</action>
+    	
+    	<!-- Class -->
+    	<action name="oper_class_*" class="classAction" method="{1}">
+    		<result type="stream" name="none">
+				<param name="contentType">text/html</param>
+				<param name="inputName">status</param>
+			</result>
+    	</action>
+    	<action name="getClassByMajor" class="classAction" method="getClassByMajor">
+    		<result type="json">
+    			<param name="root">
+    				jsonMap
+    			</param>
+    		</result>
+    	</action>
+    	<action name="getFullClassByMajor" class="classAction" method="getFullClassByMajor">
+    		<result name="list">/webs/a/bjgl/classes.jsp</result>
+    	</action>
+    	<action name="getClassFull" class="classAction" method="getClassFull">
+    		<result name="bean">/webs/a/bjgl/class.jsp</result>
+    	</action>
+    	
+    	<!-- JC -->
+    	<action name="getJlsByClass" class="jcAction" method="getJlsByClass">
+    		<result name="list">/webs/a/jcgl/jls.jsp</result>
+    	</action>
+    	<action name="getJl" class="jcAction" method="getJl">
+    		<result name="bean">/webs/a/jcgl/jl.jsp</result>
+    	</action>
+    	<action name="getCf" class="jcAction" method="getCf">
+    		<result name="bean">/webs/a/jcgl/cf.jsp</result>
+    	</action>
+    	<action name="getCfsBySid" class="jcAction" method="getCf">
+    		<result name="bean">/webs/a/jcgl/cfs.jsp</result>
+    	</action>
+    	<action name="getCfsByClass" class="jcAction" method="getCfsByClass">
+    		<result name="list">/webs/a/jcgl/cfs.jsp</result>
+    	</action>
+    	<action name="addCf" class="jcAction" method="addCf">
+    		<result type="stream" name="none">
+				<param name="contentType">text/html</param>
+				<param name="inputName">status</param>
+			</result>
+    	</action>
+    	<action name="oper_jc_*" class="jcAction" method="{1}">
+    		<result type="stream" name="none">
+				<param name="contentType">text/html</param>
+				<param name="inputName">status</param>
+			</result>
+    	</action>
+    	<action name="checkCfForm" class="jcAction" method="checkCfForm">
+    		<result type="stream" name="none">
+				<param name="contentType">text/html</param>
+				<param name="inputName">status</param>
+			</result>
+    	</action>
+    	<!-- Payment -->
+    	<action name="getJfsByClass" class="paymentAction" method="getPaymentByClass">
+    		<result name="list">/webs/a/jfgl/jfs.jsp</result>
+    	</action>
+	</package>
+</struts>
+
+
